@@ -1,47 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Open+Sans:wght@300;400;500&display=swap');
 *{
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 body{
-    padding: 100px;
-    background-color: #f1f1f1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: #f2f2f2;
+    font-family: "Open sans", Verdana, sans-serif;
+    font-size: 1em;
+    color: rgb(39, 39, 39);
+    padding: 10px;
 }
 main{
-    width: 80%;
+    width:100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+    border: 2px dotted rgb(194, 194, 194);
+}
+h1{
+    margin: 2rem 0 1rem 0;
+    font-family: Merriweather, Georgia, serif;
+    color: rgb(0, 110, 255);
+    font-size: 2em;
+    text-align: center;
+    letter-spacing: 1px;
+}
+p{
+    text-align: center;
+}
+form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .card{
-max-width: 500px;
-margin: 50px;
-padding: 20px;
+width: 100%;
+padding: 20px 10px 10px 10px;
+margin: 20px 0;
 background-color: white;
 box-shadow: 0 1px 10px rgb(204, 204, 204) ;
 display: flex;
 flex-direction: column;
 align-items: center;
 }
-
+audio{
+    width: 100%;
+    box-shadow: 0 1px 5px rgb(224, 224, 224);
+}
+audio::-webkit-media-controls-panel{
+    background-color: rgb(255, 255, 255);
+}
+audio::-webkit-media-controls-play-button{
+    background-color: rgb(145, 255, 182);
+}
 .options{
     width: 100%;
     margin-top: 20px;
     /* background-color: bisque; */
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     
 }
 .options-element{
-    /* background-color: aqua; */
+    background-color: rgb(255, 255, 255);
 }
 .options-element img{
+    width: 100%;
+    height: auto;
     cursor: pointer;
 }
 input[type=radio]{
     display: none;
+}
+
+.footer{
+    font-size: 0.8em;
+    color: gray;
+}
+.footer a{
+    color: gray;
+}
+
+@media only screen and (min-width: 600px) {
+    body{
+        padding: 10px 50px;
+    }
+    .card{
+        width: 60%;
+        min-width: 400px;
+    }
+}
+@media only screen and (min-width: 800px) {
+    body{
+        padding: 10px 100px;
+    }
+    .card{
+        width: 50%;
+        min-width: 600px;
+        padding: 3rem 3rem 2rem 3rem;
+    }
 }

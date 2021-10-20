@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="favicon/site.webmanifest"> -->
     <link rel="stylesheet" href="style.css">
     <title>Quiz</title>
 </head>
 <body>
     <main>
         <h1>The Languages Quiz</h1>
-        <p>How man languages can you recognize</p>
+        <p>How many languages will you recognize?</p>
         <form action="">
             <div class="card">
                 <audio controls>
@@ -32,8 +36,28 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <audio controls>
+                    <source src="audios/german.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="options">
+                    <div class="options-element">
+                        <input type="radio" name="germany" id="germany">
+                        <label for="germany"><img src="images/germany.png" alt="german flag"></label>
+                    </div>
+                    <div class="options-element">
+                        <input type="radio" name="germany" id="germany">
+                        <label for="germany"><img src="images/germany.png" alt="german flag"></label>
+                    </div>
+                    <div class="options-element">
+                        <input type="radio" name="germany" id="germany">
+                        <label for="germany"><img src="images/germany.png" alt="german flag"></label>
+                    </div>
+                </div>
+            </div>
         </form>
-        <div>Countries flags Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div class="footer">Countries flags made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </main>
 </body>
 </html>
