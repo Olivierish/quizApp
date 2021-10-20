@@ -64,17 +64,30 @@ audio::-webkit-media-controls-play-button{
     /* background-color: bisque; */
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
     
 }
 .options-element{
     background-color: rgb(255, 255, 255);
 }
+.options-element label{
+    display: block;
+    width: 90px;
+    height: 90px;
+}
 .options-element img{
     width: 100%;
     height: auto;
     cursor: pointer;
+    box-shadow: 0 1px 2px rgb(214, 214, 214);
 }
+/*
+.options-element img[src$=".svg"]{
+    padding-top: 10px;
+    width: 80px;
+    height:auto;
+}*/
 input[type=radio]{
     display: none;
 }
