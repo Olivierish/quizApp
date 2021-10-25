@@ -14,8 +14,9 @@
 <body>
     <main>
         <h1>The Languages Quiz</h1>
-        <p>How many languages will you recognize?</p>
-        <form action="">
+        <p>From which countries are these languages, how many of them will you recognize?</p>
+        
+        <form class="quiz-form">
             <!-- French -->
             <div class="card">
                 <audio controls>
@@ -24,16 +25,16 @@
                 </audio>
                 <div class="options">
                     <div class="options-element">
-                        <input type="radio" name="france" id="fr">
-                        <label for="fr"><img src="images/france.svg" alt="French flag"></label>
+                        <input type="radio" name="q1" id="france" value="fr">
+                        <label for="france"><img src="images/france.svg" alt="French flag"></label>
                     </div>
                     <div class="options-element">
-                        <input type="radio" name="spain" id="sp">
-                        <label for="sp"><img src="images/spain.svg" alt="french flag"></label>
+                        <input type="radio" name="q1" id="spain" value="sp">
+                        <label for="spain"><img src="images/spain.svg" alt="Spain flag"></label>
                     </div>
                     <div class="options-element">
-                        <input type="radio" name="portugal" id="pt">
-                        <label for="pt"><img src="images/portugal.svg" alt="german flag"></label>
+                        <input type="radio" name="q1" id="portugal"  value="pt">
+                        <label for="portugal"><img src="images/portugal.svg" alt="german flag"></label>
                     </div>
                 </div>
             </div>
@@ -45,16 +46,16 @@
                 </audio>
                 <div class="options">
                     <div class="options-element">
-                        <input type="radio" name="germany" id="germany">
-                        <label for="germany"><img src="images/usa.svg" alt="german flag"></label>
+                        <input type="radio" name="q2" id="denmark" value="dk">
+                        <label for="denmark"><img src="images/denmark.svg" alt="Denmark's flag"></label>
                     </div>
                     <div class="options-element">
-                        <input type="radio" name="germany" id="germany">
-                        <label for="germany"><img src="images/italy.svg" alt="german flag"></label>
+                        <input type="radio" name="q2" id="sweden" value="se">
+                        <label for="sweden"><img src="images/sweden.svg" alt="Sweden's flag"></label>
                     </div>
                     <div class="options-element">
-                        <input type="radio" name="germany" id="germany">
-                        <label for="germany"><img src="images/turkey.svg" alt="german flag"></label>
+                        <input type="radio" name="q2" id="germany" value="de">
+                        <label for="germany"><img src="images/germany.svg" alt="German's flag"></label>
                     </div>
                 </div>
             </div>
@@ -66,23 +67,107 @@
                 </audio>
                 <div class="options">
                     <div class="options-element">
-                        <input type="radio" name="germany" id="germany">
-                        <label for="germany"><img src="images/usa.svg" alt="german flag"></label>
+                        <input type="radio" name="q3" id="hr">
+                        <label for="hr"><img src="images/croatia.svg" alt="Croatia's flag" class="isSelected"></label>
                     </div>
                     <div class="options-element">
                         <input type="radio" name="poland" id="pl">
-                        <label for="pl"><img src="images/poland.svg" alt="german flag"></label>
+                        <label for="pl"><img src="images/poland.svg" alt="Poland's flag" class="isSelected"></label>
                     </div>
                     <div class="options-element">
                         <input type="radio" name="russia" id="ru">
-                        <label for="ru"><img src="images/russia.svg" alt="german flag"></label>
+                        <label for="ru"><img src="images/russia.svg" alt="Russia's flag"></label>
                     </div>
                 </div>
             </div>
-
+            <!-- Swahili -->
+            <div class="card">
+                <audio controls>
+                    <source src="audios/kenya-tanzania.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="options">
+                    <div class="options-element">
+                        <input type="radio" name="q4" id="in">
+                        <label for="in"><img src="images/india.svg" alt="india's flag"></label>
+                    </div>
+                    <div class="options-element">
+                        <input type="radio" name="q4" id="ke">
+                        <label for="ke"><img src="images/kenya.svg" alt="Kenya's flag"></label>
+                    </div>
+                    <div class="options-element">
+                        <input type="radio" name="q4" id="rw">
+                        <label for="rw"><img src="images/rwanda.svg" alt="Rwanda's flag"></label>
+                    </div>
+                </div>
+            </div>
+            <!-- Japanese -->
+            <div class="card">
+                <audio controls>
+                    <source src="audios/japanese.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="options">
+                    <div class="options-element">
+                        <input type="radio" name="q5" id="it">
+                        <label for="it"><img src="images/italy.svg" alt="Italy's flag"></label>
+                    </div>
+                    <div class="options-element">
+                        <input type="radio" name="q5" id="jp">
+                        <label for="jp"><img src="images/japan.svg" alt="Japan's flag"></label>
+                    </div>
+                    <div class="options-element">
+                        <input type="radio" name="q5" id="gr">
+                        <label for="gr"><img src="images/greece.svg" alt="Greece's flag"></label>
+                    </div>
+                </div>
+            </div>
+            <!-- Italian -->
+            <div class="card">
+                <audio controls>
+                    <source src="audios/italian.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="options">
+                    <div class="options-element">
+                        <input type="radio" name="q6" id="it">
+                        <label for="it"><img src="images/italy.svg" alt="Italy's flag"></label>
+                    </div>
+                    <div class="options-element">
+                        <input type="radio" name="q6" id="sp">
+                        <label for="sp"><img src="images/spain.svg" alt="Spain's flag"></label>
+                    </div>
+                    <div class="options-element">
+                        <input type="radio" name="q6" id="gr">
+                        <label for="gr"><img src="images/greece.svg" alt="Greece's flag"></label>
+                    </div>
+                </div>
+            </div>
+            <!-- Chinese -->
+            <div class="card">
+                <audio controls>
+                    <source src="audios/chinese.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="options">
+                    <div class="options-element">
+                        <input type="radio" name="q6" id="it">
+                        <label for="it"><img src="images/italy.svg" alt="Italy's flag"></label>
+                    </div>
+                    <div class="options-element">
+                        <input type="radio" name="q6" id="sp">
+                        <label for="sp"><img src="images/spain.svg" alt="Spain's flag"></label>
+                    </div>
+                    <div class="options-element">
+                        <input type="radio" name="q6" id="cn">
+                        <label for="cn"><img src="images/china.svg" alt="China's flag"></label>
+                    </div>
+                </div>
+            </div>
             ADD A READ ME ON GITHUB
         </form>
-        <div class="footer">Countries flags made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div class="footer"></div>
     </main>
+    <script src="app.js"></script>
 </body>
 </html>

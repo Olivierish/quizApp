@@ -1,0 +1,111 @@
+
+[
+    {
+        "audio": "french.mp3",
+        "options":
+            [
+                {
+                    "country": "france",
+                    "code": "fr"
+                },
+                {
+                    "country": "spain",
+                    "code": "sp"
+                },
+                {
+                    "country": "portugal",
+                    "code": "pt"
+                }
+            ] 
+    },
+    {
+        "audio": "german.mp3",
+        "options":
+            [
+                {
+                    "country": "denmark",
+                    "code": "dk"
+                },
+                {
+                    "country": "sweden",
+                    "code": "se"
+                },
+                {
+                    "country": "germany",
+                    "code": "de"
+                }
+            ] 
+    },
+    {
+        "audio": "russian.mp3",
+        "options":
+            [
+                {
+                    "country": "croatia",
+                    "code": "hr"
+                },
+                {
+                    "country": "poland",
+                    "code": "pl"
+                },
+                {
+                    "country": "russia",
+                    "code": "ru"
+                }
+            ] 
+    },
+    {
+        "audio": "kenya-tanzania.mp3",
+        "options":
+            [
+                {
+                    "country": "india",
+                    "code": "in"
+                },
+                {
+                    "country": "kenya",
+                    "code": "ke"
+                },
+                {
+                    "country": "rwanda",
+                    "code": "rw"
+                }
+            ] 
+    },
+    {
+        "audio": "japanese.mp3",
+        "options":
+            [
+                {
+                    "country": "philippines",
+                    "code": "ph"
+                },
+                {
+                    "country": "japan",
+                    "code": "jp"
+                },
+                {
+                    "country": "china",
+                    "code": "cn"
+                }
+            ] 
+    },
+    {
+        "audio": "italian.mp3",
+        "options":
+            [
+                {
+                    "country": "italian",
+                    "code": "it"
+                },
+                {
+                    "country": "spain",
+                    "code": "sp"
+                },
+                {
+                    "country": "greece",
+                    "code": "gr"
+                }
+            ] 
+    }
+]
