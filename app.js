@@ -16,9 +16,11 @@ quizDataPromise.then(function(quizData){
     //populate your cards here
     const numberOfQuestions = quizData.length;
 
+    let questionsCards = [];
+
     for(let i = 0; i < numberOfQuestions; i++){  
-        const cardElts = document.createElement("div");
-        cardElts.className = "card";
+        const cardElt = document.createElement("div");
+        cardElt.className = "card";
         
         //Add the audio source
         const sourceElt = document.createElement("source");
@@ -45,7 +47,10 @@ quizDataPromise.then(function(quizData){
             inputElt.name = "q"+i;
             inputElt.id = country;
             inputElt.value = quizData[i].options[j].code;
-            
+
+            if(j===0)
+            inputElt.checked = "checked";
+
             const labelElt = document.createElement("label");
             labelElt.htmlFor = country;
 
@@ -58,15 +63,46 @@ quizDataPromise.then(function(quizData){
 
             optionsElt.appendChild(optionsSingleElt);
         }
-        
-        cardElts.appendChild(audioElt);
-        cardElts.appendChild(optionsElt);
+        cardElt.appendChild(audioElt);
+        cardElt.appendChild(optionsElt);
 
-        formElt.appendChild(cardElts);
-
-        let userResponses = [];
-        formElt.addEventListener('submit',e =>{
-            
-        });
+        questionsCards.push(cardElt);
     }
+    console.log(questionsCards);
+    for(let i = 0; i < numberOfQuestions; i++){
+        formElt.insertAdjacentElement('beforeend',questionsCards[i]);
+    }
+    const buttonElt = document.createElement("button");
+    buttonElt.type = "submit";
+    buttonElt.textContent = "Submit";
+    formElt.appendChild(buttonElt);
+
+    let userResponses = [];
+    const correctAnswers = ['fr','de','ru','ke','jp','it'];
+    const emojis = ['✔️','✨','👀','😭','👎'];
+    const resultsTitleElt = document.querySelector('.results h2');
+    const resultsTextElt = document.querySelector('.note');
+    const resultsHelpElt = document.querySelector('.help');
+    let verificationTab = [];
+    formElt.addEventListener('submit',(e) =>{
+        e.preventDefault();
+        console.log(document.querySelector('input[name="q1"]:checked').value);
+        for(let i = 0; i < numberOfQuestions; i++){
+            let inputValue = document.querySelector(`input[name="q${i}"]:checked`).value;
+            userResponses.push(inputValue);
+        }
+        checkUserResults(userResponses);
+        userResponses = [];
+    });
+    function checkUserResults(userEntries){
+        for(i = 0; i < userEntries.length; i++){
+            if(userEntries[i] === correctAnswers[i]){
+                verificationTab.push(true);
+            }else{
+                verificationTab.push(false);
+            }
+        }
+        console.log(verificationTab);
+    }
+
 });
