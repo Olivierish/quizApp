@@ -4,7 +4,7 @@
     --primary-color: rgb(0, 110, 255);
     --secondary-color: rgb(145, 255, 182);
 }
-*{
+*, ::before, ::after{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -29,6 +29,7 @@ h1{
     font-family: Merriweather, Georgia, serif;
     color: var(--primary-color);
     font-size: 2em;
+    font-weight: lighter;
     text-align: center;
     letter-spacing: 1px;
 }
@@ -85,9 +86,11 @@ audio::-webkit-media-controls-play-button{
     height: auto;
     cursor: pointer;
     box-shadow: 0 1px 2px rgb(214, 214, 214);
+    transition: transform 0.2s ease-in-out;
 }
 .options-element img:hover{
     outline: 3px solid var(--secondary-color);
+    transform: scale(1.05);
 }
 .options-element .isSelected{
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
@@ -101,15 +104,70 @@ audio::-webkit-media-controls-play-button{
     height:auto;
 }*/
 input[type=radio]{
-    display: none;
+    display: unset;
 }
 
+form button{
+    display: block;
+    padding: 10px 30px;
+    font-size: 1em;
+    font-weight: bold;
+    margin: 10px 0 40px 0;
+    border: 2px solid gray;
+    color: #2e2e2e;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+form button:hover{
+    background-color: var(--secondary-color);
+}
+
+.results{
+    width: 100%;
+    padding: 25px;
+    margin: 20px 0;
+    background-color: white;
+    box-shadow: 0 1px 10px rgb(204, 204, 204) ;  
+}
+.results h2{
+    text-align: center;
+}
+.results .aide{
+    text-align: center;
+    font-size: 1em;
+    margin-top: 0.8px;
+}
+.results .note{
+    text-align: center;
+    font-size: 1em;
+    margin-top: 10px;
+}
 .footer{
     font-size: 0.8em;
     color: gray;
 }
 .footer a{
     color: gray;
+}
+
+.failure{
+    animation: failure 0.3s ease-in-out;
+}
+
+@keyframes failure{
+    0%{
+        transform: translateX(0);
+    }
+    33%{
+        transform: translateX(5px);
+    }
+    66%{
+        transform: translateX(-5px);
+    }
+    100%{
+        transform: translateX(0);
+    }
 }
 
 @media only screen and (min-width: 600px) {
@@ -120,12 +178,21 @@ input[type=radio]{
         width: 60%;
         min-width: 400px;
     }
+    .results{
+        width: 60%;
+        min-width: 400px;
+    }
 }
 @media only screen and (min-width: 800px) {
     body{
         padding: 10px 100px;
     }
     .card{
+        width: 50%;
+        min-width: 600px;
+        padding: 3rem 3rem 2rem 3rem;
+    }
+    .results{
         width: 50%;
         min-width: 600px;
         padding: 3rem 3rem 2rem 3rem;
