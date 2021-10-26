@@ -68,7 +68,6 @@ quizDataPromise.then(function(quizData){
 
         questionsCards.push(cardElt);
     }
-    console.log(questionsCards);
     for(let i = 0; i < numberOfQuestions; i++){
         formElt.insertAdjacentElement('beforeend',questionsCards[i]);
     }
@@ -86,7 +85,6 @@ quizDataPromise.then(function(quizData){
     let verificationTab = [];
     formElt.addEventListener('submit',(e) =>{
         e.preventDefault();
-        console.log(document.querySelector('input[name="q1"]:checked').value);
         for(let i = 0; i < numberOfQuestions; i++){
             let inputValue = document.querySelector(`input[name="q${i}"]:checked`).value;
             userResponses.push(inputValue);
@@ -102,7 +100,50 @@ quizDataPromise.then(function(quizData){
                 verificationTab.push(false);
             }
         }
-        console.log(verificationTab);
+        //console.log(verificationTab);
+        displayResults(verificationTab);
+        verificationTab = [];
     }
+    function displayResults(resTab){
+        const failsCounter = resTab.filter(el => el!==true).length;
+        console.log(failsCounter);
+        const resCounter = resTab.length;
+        switch(failsCounter){
+            case 0:
+                resultsTitleElt.innerText = `${emojis[0]} Great, all your answeers are correct ! ${emojis[0]}`;
+                resultsHelpElt.innerText = "";
+                resultsTextElt.innerText = `${resCounter} / ${resCounter}`;
+                break;
+            case 1:
+                resultsTitleElt.innerText = `${emojis[1]} Great! ${emojis[1]}`;
+                resultsHelpElt.innerText = "Try a different answer on the red card";
+                resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                break;
+            case 2:
+                resultsTitleElt.innerText = `${emojis[1]} Almost there! ${emojis[1]}`;
+                resultsHelpElt.innerText = "Try a different answer on the 2 red cards";
+                resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                break;
+            case 3:
+                resultsTitleElt.innerText = `${emojis[1]} Not bad! ${emojis[1]}`;
+                resultsHelpElt.innerText = "Try a different answer on the 3 red cards";
+                resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                break;
+            case 4:
+                resultsTitleElt.innerText = `${emojis[2]} Try again! ${emojis[2]}`;
+                resultsHelpElt.innerText = "Try a different answer on the 4 red cards";
+                resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                break;
+            case 5:
+                resultsTitleElt.innerText = `${emojis[2]} Try again! ${emojis[2]}`;
+                resultsHelpElt.innerText = "Try a different answer on the 5 red cards";
+                resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                break;
+            default:
+                resultsTitleElt.innerText = `${emojis[3]} Try again! ${emojis[3]}`;
+                resultsHelpElt.innerText = "Try a different answer on the 5 red cards";
+                resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
 
+        }
+    }
 });
