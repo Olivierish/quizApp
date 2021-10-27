@@ -42,17 +42,21 @@ quizDataPromise.then(function(quizData){
             optionsSingleElt.className = "options-element";
 
             let country = quizData[i].options[j].country;
+            let id = quizData[i].options[j].id;
+
             const inputElt = document.createElement("input");
             inputElt.type = "radio";
             inputElt.name = "q"+i;
-            inputElt.id = country;
+            inputElt.id = `c${id}`;
             inputElt.value = quizData[i].options[j].code;
-
             if(j===0)
             inputElt.checked = "checked";
 
+            inputElt.addEventListener('change',userInputsHandler);
+
             const labelElt = document.createElement("label");
-            labelElt.htmlFor = country;
+            labelElt.htmlFor = `c${id}`;
+            labelElt.title = country;
 
             const imgElt = document.createElement("img");
             imgElt.src =  "images/" + country + ".svg";
@@ -60,14 +64,18 @@ quizDataPromise.then(function(quizData){
             labelElt.appendChild(imgElt);
             optionsSingleElt.appendChild(inputElt);
             optionsSingleElt.appendChild(labelElt);
-
+        
             optionsElt.appendChild(optionsSingleElt);
+
         }
+
+
         cardElt.appendChild(audioElt);
         cardElt.appendChild(optionsElt);
 
         questionsCards.push(cardElt);
     }
+    
     for(let i = 0; i < numberOfQuestions; i++){
         formElt.insertAdjacentElement('beforeend',questionsCards[i]);
     }
@@ -92,6 +100,10 @@ quizDataPromise.then(function(quizData){
         checkUserResults(userResponses);
         userResponses = [];
     });
+
+    /**************** */
+    // FUNCTIONS
+    /**************** */
     function checkUserResults(userEntries){
         for(i = 0; i < userEntries.length; i++){
             if(userEntries[i] === correctAnswers[i]){
@@ -100,13 +112,12 @@ quizDataPromise.then(function(quizData){
                 verificationTab.push(false);
             }
         }
-        //console.log(verificationTab);
         displayResults(verificationTab);
+        cardsBgColorChange(verificationTab);
         verificationTab = [];
     }
     function displayResults(resTab){
         const failsCounter = resTab.filter(el => el!==true).length;
-        console.log(failsCounter);
         const resCounter = resTab.length;
         switch(failsCounter){
             case 0:
@@ -140,10 +151,57 @@ quizDataPromise.then(function(quizData){
                 resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
                 break;
             default:
-                resultsTitleElt.innerText = `${emojis[3]} Try again! ${emojis[3]}`;
+                resultsTitleElt.innerText = `${emojis[3]} ooops! ${emojis[3]}`;
                 resultsHelpElt.innerText = "Try a different answer on the 5 red cards";
                 resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
 
+        }
+    }
+    function cardsBgColorChange(tab){
+        for (let i = 0; i < tab.length; i++) {
+            if(tab[i] ===true){
+                questionsCards[i].style.backgroundColor = '#91ffb6';
+            }
+            else{
+                questionsCards[i].style.backgroundColor = '#ffa2c2';
+                questionsCards[i].classList.add("failure");
+                //Remove the failure class, in case the user failed again the animation 
+                //we will be triggered again
+                setTimeout(()=>{
+                    questionsCards[i].classList.remove("failure");
+                }, 500);
+
+            }
+        }
+    }
+
+    function userInputsHandler(e){
+        let inputElt = e.target;
+        let optionsElt = inputElt.parentNode.parentNode;
+        let cardElt = optionsElt.parentNode;
+
+        if(inputElt.id === optionsElt.childNodes[0].firstChild.id){
+            optionsElt.childNodes[0].childNodes[1].childNodes[0].classList.remove("isSelected");
+            optionsElt.childNodes[1].childNodes[1].childNodes[0].classList.add("isSelected");
+            optionsElt.childNodes[2].childNodes[1].childNodes[0].classList.add("isSelected");
+            /*If the user changes his answer after he submited, 
+            reset the background to the original color : white*/
+            cardElt.style.backgroundColor = 'white';
+
+        }
+        else if(inputElt.id === optionsElt.childNodes[1].firstChild.id){
+            optionsElt.childNodes[0].childNodes[1].childNodes[0].classList.add("isSelected");
+            optionsElt.childNodes[1].childNodes[1].childNodes[0].classList.remove("isSelected");
+            optionsElt.childNodes[2].childNodes[1].childNodes[0].classList.add("isSelected");
+
+            cardElt.style.backgroundColor = 'white';
+        }
+        else if(inputElt.id === optionsElt.childNodes[2].firstChild.id){
+            optionsElt.childNodes[0].childNodes[1].childNodes[0].classList.add("isSelected");
+            optionsElt.childNodes[1].childNodes[1].childNodes[0].classList.add("isSelected");
+            optionsElt.childNodes[2].childNodes[1].childNodes[0].classList.remove("isSelected");
+
+            cardElt.style.backgroundColor = 'white';
         }
     }
 });
