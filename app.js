@@ -49,9 +49,7 @@ quizDataPromise.then(function(quizData){
             inputElt.name = "q"+i;
             inputElt.id = `c${id}`;
             inputElt.value = quizData[i].options[j].code;
-            if(j===0)
-            inputElt.checked = "checked";
-
+ 
             inputElt.addEventListener('change',userInputsHandler);
 
             const labelElt = document.createElement("label");
@@ -81,7 +79,7 @@ quizDataPromise.then(function(quizData){
     }
     const buttonElt = document.createElement("button");
     buttonElt.type = "submit";
-    buttonElt.textContent = "Submit";
+    buttonElt.textContent = "Send";
     formElt.appendChild(buttonElt);
 
     let userResponses = [];
@@ -94,11 +92,24 @@ quizDataPromise.then(function(quizData){
     formElt.addEventListener('submit',(e) =>{
         e.preventDefault();
         for(let i = 0; i < numberOfQuestions; i++){
-            let inputValue = document.querySelector(`input[name="q${i}"]:checked`).value;
+            let inputValue;
+            try{
+                inputValue = document.querySelector(`input[name="q${i}"]:checked`).value;
+            } 
+            catch(error){
+                //When the user doesn't select an answer for a question. 
+                inputValue = "notChecked";
+            }
+            
             userResponses.push(inputValue);
         }
         checkUserResults(userResponses);
         userResponses = [];
+
+        //Scrolldown to show the results div 
+        resultsTitleElt.parentElement.scrollIntoView({
+            behavior: 'smooth'
+          });
     });
 
     /**************** */
@@ -116,44 +127,52 @@ quizDataPromise.then(function(quizData){
         cardsBgColorChange(verificationTab);
         verificationTab = [];
     }
+    
     function displayResults(resTab){
         const failsCounter = resTab.filter(el => el!==true).length;
         const resCounter = resTab.length;
         switch(failsCounter){
             case 0:
-                resultsTitleElt.innerText = `${emojis[0]} Great, all your answeers are correct ! ${emojis[0]}`;
+                resultsTitleElt.innerText = `${emojis[0]} Great, all your answers are correct ! ${emojis[0]}`;
                 resultsHelpElt.innerText = "";
-                resultsTextElt.innerText = `${resCounter} / ${resCounter}`;
+                //resultsTextElt.innerText = `${resCounter} / ${resCounter}`;
+                resultsTextElt.innerText = `${(resCounter/resCounter)*100}%`;
                 break;
             case 1:
                 resultsTitleElt.innerText = `${emojis[1]} Great! ${emojis[1]}`;
                 resultsHelpElt.innerText = "Try a different answer on the red card";
-                resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                //resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                resultsTextElt.innerText = `${(((resCounter- failsCounter)/resCounter)*100).toFixed(1)}%`;
                 break;
             case 2:
                 resultsTitleElt.innerText = `${emojis[1]} Almost there! ${emojis[1]}`;
                 resultsHelpElt.innerText = "Try a different answer on the 2 red cards";
-                resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                //resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                resultsTextElt.innerText = `${(((resCounter- failsCounter)/resCounter)*100).toFixed(1)}%`;
                 break;
             case 3:
                 resultsTitleElt.innerText = `${emojis[1]} Not bad! ${emojis[1]}`;
                 resultsHelpElt.innerText = "Try a different answer on the 3 red cards";
-                resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                //resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                resultsTextElt.innerText = `${(((resCounter- failsCounter)/resCounter)*100).toFixed(1)}%`;
                 break;
             case 4:
                 resultsTitleElt.innerText = `${emojis[2]} Try again! ${emojis[2]}`;
                 resultsHelpElt.innerText = "Try a different answer on the 4 red cards";
-                resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                //resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                resultsTextElt.innerText = `${(((resCounter- failsCounter)/resCounter)*100).toFixed(1)}%`;
                 break;
             case 5:
                 resultsTitleElt.innerText = `${emojis[2]} Try again! ${emojis[2]}`;
                 resultsHelpElt.innerText = "Try a different answer on the 5 red cards";
-                resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                //resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                resultsTextElt.innerText = `${(((resCounter- failsCounter)/resCounter)*100).toFixed(1)}%`;
                 break;
             default:
                 resultsTitleElt.innerText = `${emojis[3]} ooops! ${emojis[3]}`;
                 resultsHelpElt.innerText = "Try a different answer on the 5 red cards";
-                resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                //resultsTextElt.innerText = `${resCounter - failsCounter} / ${resCounter}`;
+                resultsTextElt.innerText = `${(((resCounter- failsCounter)/resCounter)*100).toFixed(1)}%`;
 
         }
     }
@@ -174,7 +193,7 @@ quizDataPromise.then(function(quizData){
             }
         }
     }
-
+    
     function userInputsHandler(e){
         let inputElt = e.target;
         let optionsElt = inputElt.parentNode.parentNode;
@@ -184,8 +203,8 @@ quizDataPromise.then(function(quizData){
             optionsElt.childNodes[0].childNodes[1].childNodes[0].classList.remove("isSelected");
             optionsElt.childNodes[1].childNodes[1].childNodes[0].classList.add("isSelected");
             optionsElt.childNodes[2].childNodes[1].childNodes[0].classList.add("isSelected");
-            /*If the user changes his answer after he submited, 
-            reset the background to the original color : white*/
+            //If the user changes his answer after he submited, 
+            //reset the background to the original color : white
             cardElt.style.backgroundColor = 'white';
 
         }
@@ -203,5 +222,8 @@ quizDataPromise.then(function(quizData){
 
             cardElt.style.backgroundColor = 'white';
         }
+
+        //When the use select an answer, pause the audio
+        cardElt.childNodes[0].pause();
     }
 });
